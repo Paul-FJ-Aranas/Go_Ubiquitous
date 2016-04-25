@@ -1,10 +1,10 @@
 Udacity Android Nanodegree Project 6
-=====================================
+---------------------------------------
 A wearable watch face--  a companion app for Udacity's Sunshine app-- to run on an Android Wear device.
 The OpenWeatherMap API Key has been redacted.
 
 About Sunshine
-===================================
+--------------------------------------
 
 Synchronizes weather information from OpenWeatherMap on Android Phones and Tablets. Used in the Udacity Advanced Android course.
 
