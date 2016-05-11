@@ -37,6 +37,9 @@
 
     <uses-permission android:name="com.example.android.sunshine.app.permission.C2D_MESSAGE" />
 
+    <!-- Permissions required to use the Place Picker -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <!-- Required to act as a custom watch face. -->
     <uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND" />
 
@@ -182,7 +185,15 @@
         </service>
         <service
             android:name=".gcm.RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+        <service android:name=".data.WearMessageListener">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                data android:scheme="wear" android:host="*"
+                android:path="/weather_initial_request" /
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
