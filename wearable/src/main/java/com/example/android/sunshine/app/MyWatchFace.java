@@ -91,8 +91,8 @@ public class MyWatchFace extends CanvasWatchFaceService {
         boolean mRegisteredTimeZoneReceiver = false;
         Bitmap mBackgroundBitmap;
         Bitmap mIconBitmap;
-        String mMinTemp = "55";
-        String mMaxTemp = "75";
+        String mMinTemp = "";
+        String mMaxTemp = "";
         Paint mBackgroundPaint;
         Paint mTextPaint;
         Paint mHighTempPaint;
@@ -319,7 +319,6 @@ public class MyWatchFace extends CanvasWatchFaceService {
 
         public int getBackgroundResourceForWeather(int weatherId) {
             // Update background color for weather
-            Log.d("TAG11", "RESOURCES BACKGROUND");
             if (weatherId >= 200 && weatherId <= 232) {
                 return R.drawable.dark_grey_bcgrd;
             } else if (weatherId >= 300 && weatherId <= 321) {
@@ -361,53 +360,52 @@ public class MyWatchFace extends CanvasWatchFaceService {
                 canvas.drawColor(Color.BLACK);
                 //set the position of the weather text and time while in ambient mode
                 canvas.drawText(mMaxTemp,
-                        resources.getDimension(R.dimen.maxTemp_text_position_x),
+                        mHighTempXOffset,
                         resources.getDimension(R.dimen.maxTemp_text_position_y) ,
                         mHighTempPaint);
                 canvas.drawText(mMinTemp,
-                        resources.getDimension(R.dimen.minTemp_text_position_x),
-                        resources.getDimension(R.dimen.minTemp_text_position_y),
+                        mLowTempXOffset, resources.getDimension(R.dimen.minTemp_text_position_y),
                         mLowTempPaint);
 
                 mTime.setToNow();
                 String text = mAmbient
                         ? String.format("%d:%02d", mTime.hour, mTime.minute)
                         : String.format("%d:%02d:%02d", mTime.hour, mTime.minute, mTime.second);
-                canvas.drawText(text, 75, 150, mTextPaint);
+                canvas.drawText(text, mXOffset, resources.getDimension(R.dimen.time_x_offset), mTextPaint);
 
             } else {
 
                 mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), getBackgroundResourceForWeather(id));
-                canvas.drawBitmap(mBackgroundBitmap, 0, 0, null);
-                mIconBitmap = BitmapFactory.decodeResource(getResources(), getArtResourceForWeatherCondition(id));
-                //This commented out code below is not necessary because I have implemented changing backgrounds based on the weather
-                //canvas.drawRect(0, 0, bounds.width(), bounds.height(), mBackgroundPaint);
+                if (mBackgroundBitmap != null) {
+                    canvas.drawBitmap(mBackgroundBitmap, 0, 0, null);
+                }
+                    Bitmap mIconBitmap = BitmapFactory.decodeResource(getResources(), getArtResourceForWeatherCondition(id));
+                    //This commented out code below is not necessary because I have implemented changing backgrounds based on the weather
+                    //canvas.drawRect(0, 0, bounds.width(), bounds.height(), mBackgroundPaint);
 
-                if (mIconBitmap != null) {
+                    if (mIconBitmap != null) {
 
-                    canvas.drawBitmap(mIconBitmap, resources.getDimension(R.dimen.weather_drawable_x_offset), resources.getDimension(R.dimen.weather_drawable_y_offset), mBackgroundPaint);
+                        canvas.drawBitmap(mIconBitmap, resources.getDimension(R.dimen.weather_icon_x_offset) , resources.getDimension(R.dimen.weather_icon_y_offset), mBackgroundPaint);
+
+                    }
+                    //set the position of the weather text and time
+                    canvas.drawText(mMaxTemp,
+                            mHighTempXOffset,
+                            resources.getDimension(R.dimen.maxTemp_text_position_y) ,
+                            mHighTempPaint);
+                    canvas.drawText(mMinTemp,
+                            mLowTempXOffset, resources.getDimension(R.dimen.minTemp_text_position_y),
+                            mLowTempPaint);
+
+                    mTime.setToNow();
+                    String text = mAmbient
+                            ? String.format("%d:%02d", mTime.hour, mTime.minute)
+                            : String.format("%d:%02d:%02d", mTime.hour, mTime.minute, mTime.second);
+                    canvas.drawText(text, mXOffset, resources.getDimension(R.dimen.time_x_offset), mTextPaint);
 
                 }
-                //set the position of the weather text and time
-                canvas.drawText(mMaxTemp,
-                        resources.getDimension(R.dimen.maxTemp_text_position_x),
-                        resources.getDimension(R.dimen.maxTemp_text_position_y) ,
-                        mHighTempPaint);
-                canvas.drawText(mMinTemp,
-                        resources.getDimension(R.dimen.minTemp_text_position_x),
-                        resources.getDimension(R.dimen.minTemp_text_position_y) ,
-                        mLowTempPaint);
-
-                // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
-                mTime.setToNow();
-                String text = mAmbient
-                        ? String.format("%d:%02d", mTime.hour, mTime.minute)
-                        : String.format("%d:%02d:%02d", mTime.hour, mTime.minute, mTime.second);
-                canvas.drawText(text, mXOffset, resources.getDimension(R.dimen.time_x_offset),  mTextPaint);
 
             }
-
-        }
 
         /**
          * Starts the {@link #mUpdateTimeHandler} timer if it should be running and isn't currently

@@ -8,24 +8,20 @@
 
     <dimen name="maxTemp_text_size">30sp</dimen>
     <dimen name="maxTemp_text_size_round">30sp</dimen>
-    <dimen name="maxTemp_x_offset">70dp</dimen>
-    <dimen name="maxTemp_x_offset_round">70dp</dimen>
+    <dimen name="maxTemp_x_offset">55dp</dimen>
+    <dimen name="maxTemp_x_offset_round">60dp</dimen>
 
-    <dimen name="minTemp_text_size">20dp</dimen>
-    <dimen name="minTemp_text_size_round">20dp</dimen>
-    <dimen name="minTemp_x_offset">120dp</dimen>
+    <dimen name="minTemp_text_size">20sp</dimen>
+    <dimen name="minTemp_text_size_round">20sp</dimen>
+    <dimen name="minTemp_x_offset">105dp</dimen>
     <dimen name="minTemp_x_offset_round">120dp</dimen>
 
-    <dimen name="weather_icon_x_offset">25dp</dimen>
-    <dimen name="weather_icon_y_offset">-75dp</dimen>
+    <dimen name="weather_icon_x_offset">50dp</dimen>
+    <dimen name="weather_icon_y_offset">40dp</dimen>
 
-    <dimen name="minTemp_text_position_x">105sp</dimen>
     <dimen name="minTemp_text_position_y">35sp</dimen>
-    <dimen name="maxTemp_text_position_x">55sp</dimen>
     <dimen name="maxTemp_text_position_y">35sp</dimen>
 
-    <dimen name="weather_drawable_x_offset">45dp</dimen>
-    <dimen name="weather_drawable_y_offset">40dp</dimen>
     <dimen name="time_x_offset">170sp</dimen>
 
 
